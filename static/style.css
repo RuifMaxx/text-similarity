@@ -8,7 +8,7 @@ body {
 
 h1 {
     color: #4285f4;
-    margin-left: 20px; /* 左侧空白调整 */
+    margin: 20px 0 0 20px; /* 调整这里 */
 }
 
 form {
