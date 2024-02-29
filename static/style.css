@@ -8,9 +8,11 @@ body {
 
 h1 {
     color: #4285f4;
+    margin-left: 20px; /* 左侧空白调整 */
 }
 
 form {
+    max-width: 90%; /* 修改这里 */
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
