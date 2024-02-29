@@ -1,1 +1,34 @@
-i
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论文相似度计算</title>
+</head>
+<body>
+    <h1>论文相似度计算</h1>
+    <form method="post" action="/">
+        <label for="paper1">论文1:</label>
+        <textarea name="paper1" id="paper1" rows="5" required></textarea>
+
+        <label for="paper2">论文2:</label>
+        <textarea name="paper2" id="paper2" rows="5" required></textarea>
+
+        <!-- 方法选择下拉菜单 -->
+        <label for="method">选择相似度计算方法：</label>
+        <select name="method" id="method" required>
+            <option value="cosine">余弦相似度</option>
+            <option value="levenshtein">Levenshtein距离</option>
+            <option value="simhash">SimHash</option>
+        </select>
+
+        <button type="submit">计算相似度</button>
+    </form>
+
+    {% if similarity is not none %}
+    <p>论文相似度：{{ '%.2f' % (similarity * 100) }}%</p>
+    {% endif %}
+</body>
+</html>
+
