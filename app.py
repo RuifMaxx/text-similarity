@@ -43,6 +43,12 @@ def calculate_similarity(text1, text2, method):
     else:
         return None
 
+@app.before_request
+def before_request():
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        return redirect(url, code=301)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     similarity = None
