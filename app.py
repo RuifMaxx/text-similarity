@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
-
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 import Levenshtein
 import re
 import math
@@ -7,35 +9,25 @@ import math
 app = Flask(__name__)
 
 def calculate_cosine_similarity(text1, text2):
-    # 文本预处理：去除标点符号和空格，将文本转为小写
-    text1 = re.sub(r'[^\w\s]', '', text1.lower())
-    text2 = re.sub(r'[^\w\s]', '', text2.lower())
+    # 合并文本，用于构建文本向量
+    combined_text = [text1, text2]
 
-    # 分词
-    words1 = text1.split()
-    words2 = text2.split()
-
-    # 构建词频字典
-    word_frequency = {}
-    for word in set(words1 + words2):
-        word_frequency[word] = (words1.count(word), words2.count(word))
+    # 使用CountVectorizer进行文本向量化
+    vectorizer = CountVectorizer()
+    vectors = vectorizer.fit_transform(combined_text)
 
     # 计算余弦相似度
-    dot_product = sum(f1 * f2 for f1, f2 in word_frequency.values())
-    magnitude1 = math.sqrt(sum(f1 ** 2 for f1, _ in word_frequency.values()))
-    magnitude2 = math.sqrt(sum(f2 ** 2 for _, f2 in word_frequency.values()))
+    similarity_matrix = cosine_similarity(vectors)
+    cosine_similarity_value = similarity_matrix[0, 1]
 
-    if magnitude1 * magnitude2 == 0:
-        return 0
-    else:
-        return dot_product / (magnitude1 * magnitude2)
+    return cosine_similarity_value
 
 def calculate_levenshtein_similarity(text1, text2):
     # 计算两个字符串的相似度
     similarity = 1 - Levenshtein.distance(text1, text2) / max(len(text1), len(text2))
     return similarity
 
-def simhash(text):
+def calculate_simhash_similarity(text1, text2):
     # 在此实现SimHash算法
     # 可以使用第三方库如 Simhash 或者实现自己的SimHash算法
     # 此处简化为直接返回0
@@ -47,11 +39,7 @@ def calculate_similarity(text1, text2, method):
     elif method == 'levenshtein':
         return calculate_levenshtein_similarity(text1, text2)
     elif method == 'simhash':
-        hash1 = simhash(text1)
-        hash2 = simhash(text2)
-        # 在此计算SimHash相似度
-        # 此处简化为直接返回0
-        return 0
+        return calculate_simhash_similarity(text1, text2)
     else:
         return None
 
