@@ -60,9 +60,13 @@ def index():
     similarity = None
 
     if request.method == 'POST':
-        paper1 = request.form['paper1']
-        paper2 = request.form['paper2']
-        method = request.form['method']
+        paper1 = request.form.get('paper1', '')  # 使用 get 方法，如果不存在则返回空字符串
+        paper2 = request.form.get('paper2', '')
+        method = request.form.get('method', '')  # 同样使用 get 方法
+
+        # 检查是否收到了有效的 method
+        if method not in ['cosine', 'levenshtein', 'simhash']:
+            return "Invalid method"
 
         # 计算相似度
         similarity = calculate_similarity(paper1, paper2, method)
