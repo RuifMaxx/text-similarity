@@ -58,7 +58,8 @@ def calculate_similarity(text1, text2, method):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     similarity = None
-
+    default_method = 'cosine'  # 提供默认的 method
+    
     if request.method == 'POST':
         paper1 = request.form.get('paper1', '')  # 使用 get 方法，如果不存在则返回空字符串
         paper2 = request.form.get('paper2', '')
