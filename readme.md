@@ -29,10 +29,17 @@ Nginx listens on port 80 and implements access link mandatory ssl
 
     docker run -v ./nginx.conf:/etc/nginx/conf.d/default.conf -v ./sim.ppeak.site_bundle.crt:/etc/nginx/ssl/certificate.crt -v ./sim.ppeak.site.key:/etc/nginx/ssl/private_key.key -p 80:80 -p 443:443 -d nginx 
     
-Nginx Version
+Nginx Docker Version
 
 /home/ubuntu# docker image inspect nginx:latest | grep -i version
 
         "DockerVersion": "",
                 "NGINX_VERSION=1.25.4",
                 "NJS_VERSION=0.8.3",
+/home/ubuntu# docker version
+
+    Client: Docker Engine - Community
+     Version:           26.0.0-rc1
+     API version:       1.45
+     Go version:        go1.21.6
+
