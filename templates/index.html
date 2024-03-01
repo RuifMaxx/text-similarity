@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>论文相似度计算</title>
+    <title>文本相似度计算</title>
 </head>
 <body>
-    <h1>论文相似度计算</h1>
+    <h1>文本相似度计算</h1>
     <form method="post" action="/">
-        <label for="paper1">论文1:</label>
+        <label for="paper1">文本1:</label>
         <textarea name="paper1" id="paper1" rows="10" required></textarea>
 
-        <label for="paper2">论文2:</label>
+        <label for="paper2">文本2:</label>
         <textarea name="paper2" id="paper2" rows="10" required></textarea>
 
         <!-- 方法选择下拉菜单 -->
@@ -29,7 +29,7 @@
     </form>
 
     {% if similarity is not none %}
-    <p>论文相似度：{{ '%.2f' % (similarity * 100) }}%</p>
+    <p>文本相似度：{{ '%.2f' % (similarity * 100) }}%</p>
     {% endif %}
 </body>
 </html>
