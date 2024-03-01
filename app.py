@@ -68,4 +68,4 @@ def index():
     return render_template('index.html', similarity=similarity)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=10007)
+    app.run(debug=False, host='0.0.0.0', port=10007,ssl_context=('sim.ppeak.site_bundle.crt','sim.ppeak.site.key'))
