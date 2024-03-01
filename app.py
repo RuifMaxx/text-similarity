@@ -50,14 +50,7 @@ def calculate_similarity(text1, text2, method):
 
 @app.before_request
 def before_request():
-    if request.url.startswith('http://'):
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
-        
-    elif not request.is_secure:
-        url = request.url.replace('http://', 'https://', 1)
-        return redirect(url, code=301)
+        return redirect('http://sim.ppeak.site', code=301)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
