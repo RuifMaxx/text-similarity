@@ -20,5 +20,5 @@ Run text-similarity
 
 nginx listens on port 80 and forwards to text-similarity service
 
-    docker run -v nginx.conf:/etc/nginx/nginx.conf -p 80:80 -d nginx 
+    docker run -v ./nginx.conf:/etc/nginx/conf.d/default.conf -p 80:80 -d nginx 
     
