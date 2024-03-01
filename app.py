@@ -50,7 +50,11 @@ def calculate_similarity(text1, text2, method):
 
 @app.before_request
 def before_request():
-        return redirect('https://sim.ppeak.site', code=301)
+    if request.url.startswith('https://1'):
+        url = f'https://sim.ppeak.site{request.path}'
+        code = 301
+        return redirect(url, code=code)
+        
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
