@@ -32,6 +32,7 @@ Nginx listens on port 80 and implements access link mandatory ssl
 Nginx Version
 
 /home/ubuntu# docker image inspect nginx:latest | grep -i version
+
         "DockerVersion": "",
                 "NGINX_VERSION=1.25.4",
                 "NJS_VERSION=0.8.3",
