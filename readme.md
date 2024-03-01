@@ -20,5 +20,5 @@ Run text-similarity
 
 nginx listens on port 80 and forwards to text-similarity service
 
-    docker run -v ./nginx.conf:/etc/nginx/conf.d/default.conf -v ./sim.ppeak.site_bundle.crt:/etc/certificate.crt -v sim.ppeak.site.key:/etc/private_key.key -p 80:80 -d nginx 
+    docker run -v ./nginx.conf:/etc/nginx/conf.d/default.conf -v ./sim.ppeak.site_bundle.crt:/etc/nginx/ssl/certificate.crt -v ./sim.ppeak.site.key:/etc/nginx/ssl/private_key.key -p 80:80 -d nginx 
     
