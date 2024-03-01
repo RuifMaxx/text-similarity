@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import Levenshtein
@@ -43,17 +43,6 @@ def calculate_similarity(text1, text2, method):
         return None
 
 
-@app.before_request
-def before_request():
-    if request.url.startswith('http://'):
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
-        
-    elif not request.is_secure:
-        url = request.url.replace('http://', 'https://', 1)
-        return redirect(url, code=301)
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     similarity = None
@@ -74,4 +63,4 @@ def index():
     return render_template('index.html', similarity=similarity)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=443,ssl_context=('sim.ppeak.site_bundle.crt','sim.ppeak.site.key'))
+    app.run(debug=False, host='0.0.0.0', port=80)
