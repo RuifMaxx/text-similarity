@@ -8,11 +8,18 @@ Build image
 
 Run Docker
 
-    docker run --name text-similarity -p 80:80 -d text-similarity:v0
+    docker run --name text-similarity -p 5000:5000 -d text-similarity:v0
 
 ## Deploy with SSL on VPS
 
 Obtain domain name and SSL certificate, configure DNS, open the corresponding port on the firewall
+
+Create Venv
+
+    python3 -m venv txt-sim # ubuntu 22.04, python 3.10
+    source txt-sim/bin/activate
+    # pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    pip install Flask==3.0.2 scikit-learn==1.4.1.post1 Levenshtein==0.25.0
 
 Run text-similarity
 

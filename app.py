@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import Levenshtein
+from simhash import Simhash
 
 
 app = Flask(__name__)
@@ -27,10 +28,14 @@ def calculate_levenshtein_similarity(text1, text2):
     return similarity
 
 def calculate_simhash_similarity(text1, text2):
-    # 在此实现SimHash算法
-    # 可以使用第三方库如 Simhash 或者实现自己的SimHash算法
-    # 此处简化为直接返回0
-    return 0
+    
+    a_simhash = Simhash(text1)
+    b_simhash = Simhash(text2)
+    max_hashbit = max(len(bin(a_simhash.value)), len(bin(b_simhash.value)))
+    distince = a_simhash.distance(b_simhash)
+    similarity = 1 - distince / max_hashbit
+    
+    return similarity
 
 def calculate_similarity(text1, text2, method):
     if method == 'cosine':
