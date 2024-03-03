@@ -27,7 +27,7 @@ Run text-similarity
 
 Nginx listens on port 80 and implements access link mandatory ssl
 
-    docker run -v ./nginx.conf:/etc/nginx/conf.d/default.conf -v ./sim.ppeak.site_bundle.crt:/etc/nginx/ssl/certificate.crt -v ./sim.ppeak.site.key:/etc/nginx/ssl/private_key.key -p 80:80 -p 443:443 -d nginx 
+    docker run -v ./nginx.conf:/etc/nginx/conf.d/default.conf -v ./ssl:/etc/nginx/ssl -v ./forNginxFileServer:/etc/files/static -p 80:80 -p 443:443 -d nginx 
     
 ## Nginx Docker Version
 
